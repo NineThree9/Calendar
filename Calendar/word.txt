@@ -1,0 +1,11 @@
+pen钢笔      
+pencil铅笔     
+pencil-case铅笔盒     
+ruler尺子      
+book书      
+bag包   
+comic book漫画书    
+ post card明信片      
+newspaper报纸    
+schoolbag书包     
+eraser橡皮   
