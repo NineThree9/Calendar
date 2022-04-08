@@ -1,5 +1,5 @@
 #include "Calendar.h"
-//ÅĞ¶ÏÄ³ÄêÄ³ÔÂÄ³ÈÕÊÇÖÜ¼¸µÄº¯Êı
+//åˆ¤æ–­æŸå¹´æŸæœˆæŸæ—¥æ˜¯å‘¨å‡ çš„å‡½æ•°
 int Calendar::CaculateWeekDay(int y, int m, int d)
 {
     if (m == 1 || m == 2)
@@ -19,12 +19,12 @@ int Calendar::CaculateWeekDay(int y, int m, int d)
     case 6: return 7; break;
     }
 }
-//¼ÆËãÊÇ·ñÊÇÈòÄê
+//è®¡ç®—æ˜¯å¦æ˜¯é—°å¹´...
 bool Calendar::isLoopYaer(int year)
 {
     return (((0 == (year % 4)) && (0 != (year % 100))) || (0 == (year % 400)));
 }
-//¼ÆËã
+//è®¡ç®—
 int Calendar::getTotalMonthDays(int year, int month)
 {
     int nDays = 0;
@@ -47,7 +47,7 @@ int Calendar::getTotalMonthDays(int year, int month)
     }
     return nDays;
 }
-//¼ÆËãÄ³ÔÂÒ»¹²ÓĞ¼¸Ìì
+//è®¡ç®—æŸæœˆä¸€å…±æœ‰å‡ å¤©
 int Calendar::getMonthDays(int year, int month)
 {
     int nDays = 0;
@@ -70,13 +70,13 @@ int Calendar::getMonthDays(int year, int month)
 
     return nDays;
 }
-//¼ÆËãÅ©Àú
+//è®¡ç®—å†œå†
 int Calendar::LunarCalendar(int year, int month, int day)
 {
     int Spring_NY, Sun_NY, StaticDayCount;
     int index, flag;
-    //Spring_NY ¼ÇÂ¼´º½ÚÀëµ±ÄêÔªµ©µÄÌìÊı¡£  
-    //Sun_NY ¼ÇÂ¼ÑôÀúÈÕÀëµ±ÄêÔªµ©µÄÌìÊı¡£  
+    //Spring_NY è®°å½•æ˜¥èŠ‚ç¦»å½“å¹´å…ƒæ—¦çš„å¤©æ•°ã€‚  
+    //Sun_NY è®°å½•é˜³å†æ—¥ç¦»å½“å¹´å…ƒæ—¦çš„å¤©æ•°ã€‚  
     if (((LunarCalendarTable[year - 1901] & 0x0060) >> 5) == 1)
         Spring_NY = (LunarCalendarTable[year - 1901] & 0x001F) - 1;
     else
@@ -84,11 +84,11 @@ int Calendar::LunarCalendar(int year, int month, int day)
     Sun_NY = MonthAdd[month - 1] + day - 1;
     if ((!(year % 4)) && (month > 2))
         Sun_NY++;
-    //StaticDayCount¼ÇÂ¼´óĞ¡ÔÂµÄÌìÊı 29 »ò30  
-    //index ¼ÇÂ¼´ÓÄÄ¸öÔÂ¿ªÊ¼À´¼ÆËã¡£  
-    //flag ÊÇÓÃÀ´¶ÔÈòÔÂµÄÌØÊâ´¦Àí¡£  
-    //ÅĞ¶ÏÑôÀúÈÕÔÚ´º½ÚÇ°»¹ÊÇ´º½Úºó  
-    if (Sun_NY >= Spring_NY)//ÑôÀúÈÕÔÚ´º½Úºó£¨º¬´º½ÚÄÇÌì£©  
+    //StaticDayCountè®°å½•å¤§å°æœˆçš„å¤©æ•° 29 æˆ–30  
+    //index è®°å½•ä»å“ªä¸ªæœˆå¼€å§‹æ¥è®¡ç®—ã€‚  
+    //flag æ˜¯ç”¨æ¥å¯¹é—°æœˆçš„ç‰¹æ®Šå¤„ç†ã€‚  
+    //åˆ¤æ–­é˜³å†æ—¥åœ¨æ˜¥èŠ‚å‰è¿˜æ˜¯æ˜¥èŠ‚å  
+    if (Sun_NY >= Spring_NY)//é˜³å†æ—¥åœ¨æ˜¥èŠ‚åï¼ˆå«æ˜¥èŠ‚é‚£å¤©ï¼‰  
     {
         Sun_NY -= Spring_NY;
         month = 1;
@@ -117,7 +117,7 @@ int Calendar::LunarCalendar(int year, int month, int day)
         }
         day = Sun_NY + 1;
     }
-    else //ÑôÀúÈÕÔÚ´º½ÚÇ°  
+    else //é˜³å†æ—¥åœ¨æ˜¥èŠ‚å‰  
     {
         Spring_NY -= Sun_NY;
         year--;
@@ -153,16 +153,16 @@ int Calendar::LunarCalendar(int year, int month, int day)
     else
         return 0;
 }
-//Õ¹Ê¾Å©Àú
+//å±•ç¤ºå†œå†
 char* Calendar::output(int year, int month, int day)
 {     
-    const char* ChDay[] = {"*  ","³õÒ»  ","³õ¶ş  ","³õÈı  ","³õËÄ  ","³õÎå  ","³õÁù  ","³õÆß  ","³õ°Ë  ","³õ¾Å  ","³õÊ®  ", "Ê®Ò»  ","Ê®¶ş  ","Ê®Èı  ","Ê®ËÄ  ","Ê®Îå  ","Ê®Áù  ","Ê®Æß  ","Ê®°Ë  ","Ê®¾Å  ","¶şÊ®  ","Ø¥Ò»  ","Ø¥¶ş  ","Ø¥Èı  ","Ø¥ËÄ  ","Ø¥Îå  ","Ø¥Áù  ","Ø¥Æß  ","Ø¥°Ë  ","Ø¥¾Å  ","ÈıÊ®  "};
-    const char* ChMonth[] = { "*  ","Õı  ","¶ş  ","Èı  ","ËÄ  ","Îå  ","Áù  ","Æß  ","°Ë  ","¾Å  ","Ê®  ","Ê®Ò»  ","À°  " };
+    const char* ChDay[] = {"*  ","åˆä¸€  ","åˆäºŒ  ","åˆä¸‰  ","åˆå››  ","åˆäº”  ","åˆå…­  ","åˆä¸ƒ  ","åˆå…«  ","åˆä¹  ","åˆå  ", "åä¸€  ","åäºŒ  ","åä¸‰  ","åå››  ","åäº”  ","åå…­  ","åä¸ƒ  ","åå…«  ","åä¹  ","äºŒå  ","å»¿ä¸€  ","å»¿äºŒ  ","å»¿ä¸‰  ","å»¿å››  ","å»¿äº”  ","å»¿å…­  ","å»¿ä¸ƒ  ","å»¿å…«  ","å»¿ä¹  ","ä¸‰å  "};
+    const char* ChMonth[] = { "*  ","æ­£  ","äºŒ  ","ä¸‰  ","å››  ","äº”  ","å…­  ","ä¸ƒ  ","å…«  ","ä¹  ","å  ","åä¸€  ","è…Š  " };
     memset(str, '\0', sizeof(str));
     memset(s, '\0', sizeof(s));
     if (LunarCalendar(year, month, day))
     {
-        strcat_s(s, "Èò");
+        strcat_s(s, "é—°");
         strcat_s(s, ChMonth[(LunarCalendarDay & 0x3C0) >> 6]);
     }
     else
@@ -179,17 +179,17 @@ Calendar::Calendar(QWidget* parent)
     this->resize(800, 600);
     int w = this->width();
     int h = this->height();
-    //»ñÈ¡µ±Ç°ÄêÔÂÈÕ
+    //è·å–å½“å‰å¹´æœˆæ—¥
     current_year = QDate::currentDate().year();
     current_month = QDate::currentDate().month();
     current_day = QDate::currentDate().day();
-    //³õÊ¼»¯Êı×é
+    //åˆå§‹åŒ–æ•°ç»„
     date = new MyLabel * [6];
     for (int i = 0; i < 6; i++)
     {
         date[i] = new MyLabel[7];
     }
-    //½«ĞÇÆÚ¼¸´òÓ¡ÔÚ×îÉÏ·½
+    //å°†æ˜ŸæœŸå‡ æ‰“å°åœ¨æœ€ä¸Šæ–¹
     headLine = new QLabel[7];
     for (int i = 0; i < 7; i++)
     {
@@ -199,22 +199,22 @@ Calendar::Calendar(QWidget* parent)
         headLine[i].setStyleSheet("QLabel{font-size:20px;}");
         headLine[i].setAlignment(Qt::AlignCenter);
     }
-    headLine[1].setText(QString::fromLocal8Bit("ÖÜÒ»"));
-    headLine[2].setText(QString::fromLocal8Bit("ÖÜ¶ş"));
-    headLine[3].setText(QString::fromLocal8Bit("ÖÜÈı"));
-    headLine[4].setText(QString::fromLocal8Bit("ÖÜËÄ"));
-    headLine[5].setText(QString::fromLocal8Bit("ÖÜÎå"));
-    headLine[6].setText(QString::fromLocal8Bit("ÖÜÁù"));
-    headLine[0].setText(QString::fromLocal8Bit("ÖÜÈÕ"));
+    headLine[1].setText(QString::fromLocal8Bit("å‘¨ä¸€"));
+    headLine[2].setText(QString::fromLocal8Bit("å‘¨äºŒ"));
+    headLine[3].setText(QString::fromLocal8Bit("å‘¨ä¸‰"));
+    headLine[4].setText(QString::fromLocal8Bit("å‘¨å››"));
+    headLine[5].setText(QString::fromLocal8Bit("å‘¨äº”"));
+    headLine[6].setText(QString::fromLocal8Bit("å‘¨å…­"));
+    headLine[0].setText(QString::fromLocal8Bit("å‘¨æ—¥"));
     bar = new QLabel;
     bar->setParent(this);
     bar->resize(4*w / 10, 15*h / 100);
     bar->move( 3*w / 10 , 15*h / 100);
-    bar->setText(QString::number(current_year, 10)+ QString::fromLocal8Bit("Äê") + QString::number(current_month, 10) + QString::fromLocal8Bit("ÔÂ"));
+    bar->setText(QString::number(current_year, 10)+ QString::fromLocal8Bit("å¹´") + QString::number(current_month, 10) + QString::fromLocal8Bit("æœˆ"));
     bar->setStyleSheet("QLabel{font-size:20px;}");
     bar->setAlignment(Qt::AlignCenter);
 
-    //½«Êı×éµ¥Ôª·ÖÅäµ½½çÃæÉÏ
+    //å°†æ•°ç»„å•å…ƒåˆ†é…åˆ°ç•Œé¢ä¸Š
     for (int i = 0; i < 6; i++)
     {
         for (int j = 0; j < 7; j++)
@@ -227,7 +227,7 @@ Calendar::Calendar(QWidget* parent)
     QIcon  t1;
     t1.addFile(":/Calendar/icon.jpeg");
     this->setWindowIcon(t1);
-    //·ÖÅä°´Å¥
+    //åˆ†é…æŒ‰é’®
     QPushButton* add = new QPushButton;
     QIcon  t2;
     t2.addFile(":/Calendar/add.jpg");
@@ -266,7 +266,7 @@ Calendar::Calendar(QWidget* parent)
     //ui.setupUi(this);
     QTime current = QTime::currentTime();
     srand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
-    int b = rand() % 9;   //Ëæ»úÉú³É0µ½9µÄËæ»úÊı
+    int b = rand() % 9;   //éšæœºç”Ÿæˆ0åˆ°9çš„éšæœºæ•°
     text_saying = new QTextEdit;
     text_saying->resize(3*w/10,15*h/100);
     text_saying->move(0,0);
@@ -290,14 +290,14 @@ Calendar::Calendar(QWidget* parent)
     Todo->move(85*w/100,3*h/10);
     Todo->setParent(this);
     connect(Todo, &QPushButton::clicked, this, [=] {this->sx(); });
-    //±¸ÍüÂ¼
+    //å¤‡å¿˜å½•
     waiting = new QPushButton;
     waiting->setText("Froget");
     waiting->resize(15 * w / 100, h / 10);
     waiting->move(85 * w / 100, 4* h / 10);
     waiting->setParent(this);
     connect(waiting, &QPushButton::clicked, this, [=] {this->wit(); });
-    //Ë¢ĞÂÈÕÀúÊı¾İ
+    //åˆ·æ–°æ—¥å†æ•°æ®
     initWidget();
 }
 Calendar::~Calendar()
@@ -311,12 +311,12 @@ Calendar::~Calendar()
 }
 void  Calendar::initWidget()
 {
-    bar->setText(QString::number(current_year, 10) + QString::fromLocal8Bit("Äê") + QString::number(current_month, 10) + QString::fromLocal8Bit("ÔÂ"));
+    bar->setText(QString::number(current_year, 10) + QString::fromLocal8Bit("å¹´") + QString::number(current_month, 10) + QString::fromLocal8Bit("æœˆ"));
     QString a;
-    //¼ÆËã¸ÃÔÂµÄµÚÒ»ÌìÊÇĞÇÆÚ¼¸
+    //è®¡ç®—è¯¥æœˆçš„ç¬¬ä¸€å¤©æ˜¯æ˜ŸæœŸå‡ 
     int firweek = CaculateWeekDay(current_year, current_month, 1);
     int lastMonthDay;
-    //¼ÆËãÉÏ¸öÔÂÓĞ¼¸Ìì
+    //è®¡ç®—ä¸Šä¸ªæœˆæœ‰å‡ å¤©
     if (current_month == 1)
     {
         lastMonthDay = getMonthDays(current_year - 1, 12);
@@ -329,7 +329,7 @@ void  Calendar::initWidget()
     int total = 1;
     if (firweek == 1)
     {
-        //ÏÔÊ¾ÉÏ¸öÔÂµÄÌìÊı
+        //æ˜¾ç¤ºä¸Šä¸ªæœˆçš„å¤©æ•°
         for (int i = 6; i >= 0; i--)
         {
             if (current_month == 1)
@@ -342,7 +342,7 @@ void  Calendar::initWidget()
             }
 
         }
-        //ÏÔÊ¾µ±Ç°ÔÂÌìÊı
+        //æ˜¾ç¤ºå½“å‰æœˆå¤©æ•°
         int i = 1; int j = 0;
         while (total <= currentMonthDay)
         {
@@ -356,7 +356,7 @@ void  Calendar::initWidget()
 
         }
         total = 1;
-        //ÏÔÊ¾ÏÂÒ»¸öÔÂ
+        //æ˜¾ç¤ºä¸‹ä¸€ä¸ªæœˆ
         while (i < 6)
         {
             if (current_month == 12)
@@ -389,7 +389,7 @@ void  Calendar::initWidget()
             }
            
         }
-        //ÏÔÊ¾µ±Ç°ÔÂ
+        //æ˜¾ç¤ºå½“å‰æœˆ
         for (int i = firweek; i < 7; i++)
         {
             date[0][i].setText(QString::number(total++, 10) + "\n" + QString::fromLocal8Bit(output(current_year, current_month, total)));
@@ -411,7 +411,7 @@ void  Calendar::initWidget()
 
         }
         total = 1;
-        //ÏÔÊ¾ÏÂÒ»¸öÔÂ
+        //æ˜¾ç¤ºä¸‹ä¸€ä¸ªæœˆ
         while (i < 6)
         {
             if (current_month == 12)
@@ -457,7 +457,7 @@ void Calendar::subMonth()
 }
 
 void Calendar::UpdateSaying() {
-    int b = rand() % 9;   //Ëæ»úÉú³É0µ½9µÄËæ»úÊı
+    int b = rand() % 9;   //éšæœºç”Ÿæˆ0åˆ°9çš„éšæœºæ•°
     text_saying->clear();
     text_word->clear();
     text_saying->insertPlainText(saying[b]);
